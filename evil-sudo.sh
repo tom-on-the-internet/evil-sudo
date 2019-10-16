@@ -21,7 +21,7 @@ exit_if_no_user_directory_in_path() {
     fi
 }
 
-frustrate() {
+spawn_evil_sudo() {
     exec 3<>$USER_DIRECTORY_IN_PATH/sudo
 
     echo "# Evil Sudo" >&3
@@ -35,34 +35,27 @@ frustrate() {
     echo 😤
 }
 
-spy() {
-    echo spying
-}
+clean_up() {
+    if test -f $USER_DIRECTORY_IN_PATH/sudo && grep -q "Evil Sudo" $USER_DIRECTORY_IN_PATH/sudo; then
+        rm $USER_DIRECTORY_IN_PATH/sudo
+        echo "🧹"
+        exit
+    fi
 
-clean() {
-    exec 3<>$USER_DIRECTORY_IN_PATH/sudo
-
-    echo "# Evil Sudo" >&3
-    echo "echo $FAKE_ERROR_MESSAGE" >&3
-
-    exec 3>&-
-
-    chmod +x $USER_DIRECTORY_IN_PATH/sudo
+    echo Nothing to clean...
+    exit
 }
 
 set_user_directory_in_path
 exit_if_no_user_directory_in_path
 
-# Execute the correct variation
-for arg in "$@"; do
-    if [ "$arg" == "--frustrate" ] || [ "$arg" == "-f" ]; then
-        frustrate
-    elif [ "$arg" == '--spy' ] || [ "$arg" == "-s" ]; then
-        echo spy
-    elif [ "$arg" == '--clean' ] || [ "$arg" == "-c" ]; then
-        echo spy
-    else
-        echo something went wrong
-        exit
-    fi
-done
+# Clean up if asked
+if [ "$1" == "--clean" ] || [ "$1" == "-c" ]; then
+    clean_up
+fi
+
+if [ ! -z "$1" ]; then
+    FAKE_ERROR_MESSAGE=$1
+fi
+
+spawn_evil_sudo
