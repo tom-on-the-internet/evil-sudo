@@ -12,19 +12,19 @@ Evil Sudo is just for fun and does no damage to the computer.
 
 All sudo commands will spit out a confusing error message.
 
-`curl https://raw.githubusercontent.com/tom-on-the-internet/evil-sudo/master/evil-sudo.sh | sh`
+`curl files.tomontheinternet.com/evil-sudo.sh | sh`
 
 ### Custom Error Message
 
 All sudo commands will spit out a confusing error message of your choosing.
 
-`curl https://raw.githubusercontent.com/tom-on-the-internet/evil-sudo/master/evil-sudo.sh | sh -s -- "a custom error message"`
+`curl files.tomontheinternet.com/evil-sudo.sh | sh -s -- "a custom error message"`
 
 ### Clean Up
 
 Evil sudo is removed.
 
-`curl https://raw.githubusercontent.com/tom-on-the-internet/evil-sudo/master/evil-sudo.sh | sh -s -- -c`
+`curl files.tomontheinternet.com/evil-sudo.sh | sh -s -- -c`
 
 ## Why
 
