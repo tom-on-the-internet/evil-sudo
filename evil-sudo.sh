@@ -57,4 +57,3 @@ fi
 
 clean_up
 spawn_evil_sudo
-hash -r
