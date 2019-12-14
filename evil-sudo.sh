@@ -30,7 +30,7 @@ clean_up() {
     rm -rf ~/.evil-sudo
 
     # remove directory from path
-    sed -i '/evil sudo/d' $SHELL_CONFIG_FILE
+    awk '!/evil sudo' $SHELL_CONFIG_FILE > es_temprc && mv es_temprc $SHELL_CONFIG_FILE
 }
 
 set_shell_config_file() {
