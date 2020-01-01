@@ -1,6 +1,6 @@
 # Evil Sudo
 
-Like `sudo`, but *evil*.
+Like `sudo`, but _evil_.
 
 Your coworker walks away from their desk and forgets to lock their computer. Big mistake. Copy and paste the command below into the terminal. Walk away. Now, when they try to use `sudo` they will get a confusing error message which you can customize.
 
@@ -34,9 +34,6 @@ Evil sudo is removed.
 
 ## How
 
-Evil Sudo looks for the first directory in the users path to which they have access. Usually this is `~/.local/bin`. When a directory is found, Evil Sudo creates a `sudo` file which spits out an error message. Because this file is earlier in the $PATH than the *real* `sudo` command, it takes precedence.
+`evil-sudo.sh` adds a directory to your `$PATH` and then creates a fake sudo program in that directory. It does this by determining what shell you are using, and adding a line to your `rc` file. So far, it only supports bash and zsh, but that covers 95% of all users. Now, when you run the `sudo` command, your shell finds the fake sudo program first and uses the fake sudo instead of the real sudo.
 
 Evil Sudo does not modify the `sudo` program at all. It can't because it's not run as root.
-
-
-
